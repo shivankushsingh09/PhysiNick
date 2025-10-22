@@ -4,45 +4,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhysiNick</title>
+    <title>PhysiNick - Your Physics Alter Ego</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --accent: #ff6b6b;
+        }
+
         body {
-            background: url('https://via.placeholder.com/1500x800') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            font-family: "Nunito", sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background-size: 400% 400%;
+            color: var(--light);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
         }
 
         .container {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 50px;
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 800px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--light);
+            text-shadow: 0 0 10px var(--secondary);
+            margin-bottom: 2rem;
+            font-size: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            bottom: -10px;
+            left: 20%;
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            color: #a8b2d1;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+        }
+
+        .input-group {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            box-shadow: 0 0 0 0.25rem rgba(106, 17, 203, 0.25);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .btn-generate {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            padding: 0 2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+        }
+
+        .result-container {
+            min-height: 120px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nickname {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, #a8b2d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .nickname::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 10px;
+            padding: 2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .footer {
+            margin-top: 3rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nickname {
+                font-size: 1.5rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            .input-group > * {
+                border-radius: 0 !important;
+                margin: 2px 0;
+            }
+            
+            .btn-generate {
+                width: 100%;
+                padding: 0.8rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container text-center">
-        <h1 class="mb-4">PhysiNick</h1>
-        <div class="input-group mb-3">
-            <input type="text" id="firstName" class="form-control" placeholder="First Name Initial" maxlength="1">
-            <input type="text" id="lastName" class="form-control" placeholder="Last Name Initial" maxlength="1">
-            <button class="btn btn-primary" onclick="generateNickname()">Generate</button>
+    <div class="particles" id="particles-js"></div>
+    
+    <div class="container text-center animate__animated animate__fadeIn">
+        <h1 class="floating">PhysiNick</h1>
+        <p class="subtitle">Discover your unique physics alter ego</p>
+        
+        <div class="input-group">
+            <input type="text" id="firstName" class="form-control" placeholder="First Name Initial" maxlength="1" autocomplete="off">
+            <input type="text" id="lastName" class="form-control" placeholder="Last Name Initial" maxlength="1" autocomplete="off">
+            <button class="btn btn-generate" onclick="generateNickname()">Generate</button>
         </div>
-        <div id="result" class="nickname"></div>
+        
+        <div class="result-container">
+            <div id="result" class="nickname animate__animated">Enter your initials above</div>
+        </div>
+        
+        <div class="footer">
+            Made with ❤️ for physics enthusiasts | Refresh for a new experience
+        </div>
     </div>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
     <script>
+        // Initialize particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#ffffff" },
+                    shape: { type: "circle" },
+                    opacity: {
+                        value: 0.5,
+                        random: true,
+                        anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: { enable: true, speed: 2, size_min: 0.1, sync: false }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#6a11cb",
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false,
+                        attract: { enable: false, rotateX: 600, rotateY: 1200 }
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "grab" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 140, line_linked: { opacity: 1 } },
+                        push: { particles_nb: 4 }
+                    }
+                },
+                retina_detect: true
+            });
+        });
+
+        // Nickname generator data
         const firstNames = {
             A: "Adiabatic", B: "Bogoliubov", C: "Critical", D: "Diffraction-Limited",
             E: "Entangled", F: "Fermi-Dirac", G: "Gauge-Invariant", H: "Holographic",
@@ -65,19 +310,91 @@
             Z: "Zeeman Zealot"
         };
 
+        // Add animation to inputs on focus
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+                this.parentElement.style.transition = 'transform 0.3s ease';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+            
+            // Auto-focus next input
+            input.addEventListener('input', function() {
+                if (this.value.length === this.maxLength) {
+                    const nextInput = this.nextElementSibling;
+                    if (nextInput && nextInput.tagName === 'INPUT') {
+                        nextInput.focus();
+                    } else if (nextInput && nextInput.tagName === 'BUTTON') {
+                        generateNickname();
+                    }
+                }
+            });
+        });
+
+        // Add Enter key functionality
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateNickname();
+            }
+        });
+
         function generateNickname() {
             const firstInitial = document.getElementById('firstName').value.toUpperCase();
             const lastInitial = document.getElementById('lastName').value.toUpperCase();
-            let nickname = "";
-
-            if (firstNames[firstInitial] && lastNames[lastInitial]) {
-                nickname = `${firstNames[firstInitial]} ${lastNames[lastInitial]}`;
-            } else {
-                nickname = "Invalid initials! Please use A-Z.";
+            const resultElement = document.getElementById('result');
+            
+            // Add animation class
+            resultElement.classList.remove('animate__fadeIn');
+            void resultElement.offsetWidth; // Trigger reflow
+            resultElement.classList.add('animate__animated', 'animate__fadeIn');
+            
+            if (!firstInitial || !lastInitial) {
+                resultElement.textContent = "Please enter both initials!";
+                return;
             }
-
-            document.getElementById('result').innerText = nickname;
+            
+            if (firstNames[firstInitial] && lastNames[lastInitial]) {
+                const nickname = `${firstNames[firstInitial]} ${lastNames[lastInitial]}`;
+                // Typewriter effect
+                let i = 0;
+                resultElement.textContent = '';
+                const speed = 50; // ms per character
+                
+                function typeWriter() {
+                    if (i < nickname.length) {
+                        resultElement.textContent += nickname.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, speed);
+                    }
+                }
+                
+                typeWriter();
+                
+                // Add confetti effect on successful generation
+                if (window.confetti) {
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 }
+                    });
+                }
+            } else {
+                resultElement.textContent = "Please enter valid initials (A-Z)";
+            }
         }
+        
+        // Add confetti effect
+        (function() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js';
+            script.onload = function() {
+                window.confetti = window.confetti;
+            };
+            document.head.appendChild(script);
+        })();
     </script>
 </body>
 
