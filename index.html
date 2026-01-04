@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhysiNick - Your Physics Alter Ego</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
+<body>
+    <div class="particles" id="particles-js"></div>
+
+    <div class="container text-center animate__animated animate__fadeIn">
+        <h1 class="floating">PhysiNick</h1>
+        <p class="subtitle">Discover your unique physics alter ego</p>
+
+        <div class="input-group">
+            <input type="text" id="firstName" class="form-control" placeholder="First Name Initial" maxlength="1"
+                autocomplete="off">
+            <input type="text" id="lastName" class="form-control" placeholder="Last Name Initial" maxlength="1"
+                autocomplete="off">
+            <button class="btn btn-generate" onclick="generateNickname()">Generate</button>
+        </div>
+
+        <div class="result-container">
+            <div id="result" class="nickname animate__animated">Enter your initials above</div>
+        </div>
+
+        <div class="footer">
+            Made with ❤️ for physics enthusiasts | Refresh for a new experience
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+
+</html>
